@@ -8,7 +8,7 @@ library(tidyverse)
 ```
 
 ## Problem 1
-Create data frame
+#Create data frame
 
 ```{r}
 df = tibble(
@@ -18,7 +18,7 @@ df = tibble(
   vec_factor = factor(c("small","large","medium","large","large","small","medium","medium","medium","medium")))
 ```
 
-Calculate mean
+# Calculate mean
 
 ```{r}
 mean_sample = mean(pull(df, random_samp))
@@ -39,10 +39,20 @@ After using as.numeric function, logic and factor variables can give results whi
 
 ## Problem 2
 
-Load penguins dataset
+# Load penguins dataset
 
 ```{r}
-penguins_data = data("penguins", package = "palmerpenguins")
+data("penguins", package = "palmerpenguins")
 ```
 
+This dataset provides information about penguins `r colnames(penguins)`.
+It has `r nrow(penguins)` rows and `r ncol(penguins)` columns. The mean flipper length is `r mean(penguins[["flipper_length_mm"]], na.rm=TRUE)`.
+
+# Make plot
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+
+ggsave("penguins'length.png")
+```
 
