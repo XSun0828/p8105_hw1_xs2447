@@ -2,3 +2,47 @@
 title: "p8105_hw1_xs2447"
 output: github_document
 ---
+
+```{r}
+library(tidyverse)
+```
+
+## Problem 1
+Create data frame
+
+```{r}
+df = tibble(
+  random_samp = rnorm(10),
+  vec_log = c(random_samp > 0),
+  vec_char = c("Hi","My","name","is","Xinran","Sun","Nice","to","Meet","You"),
+  vec_factor = factor(c("small","large","medium","large","large","small","medium","medium","medium","medium")))
+```
+
+Calculate mean
+
+```{r}
+mean_sample = mean(pull(df, random_samp))
+mean_log = mean(pull(df, vec_log))
+mean_char = mean(pull(df, vec_char))
+mean_factor = mean(pull(df, vec_factor))
+```
+
+We cannot get mean for the character and factor vector. No I try to use as.numeric function for the logic, character, and factor variables.
+
+```{r}
+mean_log = mean(as.numeric(pull(df, vec_log)))
+mean_char = mean(as.numeric(pull(df, vec_char)))
+mean_factor = mean(as.numeric(pull(df, vec_factor)))
+```
+
+After using as.numeric function, logic and factor variables can give results while character variable still cannot give result. This is because as.numeric assign numerical values to the logic and factor variables, such as 1 for TRUE. However, what assigned to character variable is "NA". Therefore, R cannot calculate the mean of the "NA"s.
+
+## Problem 2
+
+Load penguins dataset
+
+```{r}
+penguins_data = data("penguins", package = "palmerpenguins")
+```
+
+
